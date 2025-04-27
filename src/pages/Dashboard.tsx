@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import { CreditCard, User, Dashboard as DashboardIcon, DollarSign, LogOut } from "lucide-react";
+import { CreditCard, User, LayoutDashboard, DollarSign, LogOut } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import CreditButton from "@/components/CreditButton";
 import { useAuth } from "@/contexts/AuthContext";
@@ -148,7 +148,7 @@ const Dashboard = () => {
             }`}
             onClick={() => setActiveTab("dashboard")}
           >
-            <DashboardIcon className="h-5 w-5" />
+            <LayoutDashboard className="h-5 w-5" />
             <span className="text-xs mt-1">Dashboard</span>
           </button>
           <button
