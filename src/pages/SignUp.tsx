@@ -47,7 +47,7 @@ const SignUp = () => {
         title: "Account created",
         description: "Your account has been created successfully",
       });
-      navigate("/purchase-code");
+      navigate("/welcome-message"); // Updated navigation
     } catch (error) {
       toast({
         title: "Sign up failed",
