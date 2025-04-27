@@ -1,31 +1,45 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Input } from "@/components/ui/input";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import MobileLayout from "@/components/MobileLayout";
 import Logo from "@/components/Logo";
 import CreditButton from "@/components/CreditButton";
 
-type PlanOption = {
-  amount: number;
-  fee: number;
-  id: string;
-};
+const formSchema = z.object({
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  phone: z.string().min(10, "Phone number must be at least 10 digits"),
+});
 
 const PurchaseCode = () => {
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   
-  const planOptions: PlanOption[] = [
-    { amount: 50000, fee: 6000, id: "plan1" },
-    { amount: 100000, fee: 10000, id: "plan2" },
-    { amount: 120000, fee: 12000, id: "plan3" },
-    { amount: 150000, fee: 15000, id: "plan4" },
-    { amount: 180000, fee: 18000, id: "plan5" },
-    { amount: 200000, fee: 20000, id: "plan6" },
-  ];
-  
-  const handleProceedToPayment = () => {
-    navigate("/enter-code");
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      phone: "",
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
+    try {
+      // Here you would typically send the form data to your backend
+      console.log("Form values:", values);
+      navigate("/enter-code");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   return (
@@ -35,53 +49,71 @@ const PurchaseCode = () => {
       </div>
       
       <div className="mb-8">
-        <div className="flex justify-center mb-4">
-          <div className="bg-purple-700 rounded-full p-4">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" className="text-white">
-              <path d="M19 7h-1V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM8 6h8v1H8V6zm10 12H6v-4h12v4zm0-6H6V9h12v3z" fill="currentColor" />
-              <circle cx="8" cy="11" r="1" fill="currentColor" />
-              <circle cx="16" cy="11" r="1" fill="currentColor" />
-            </svg>
-          </div>
-        </div>
+        <h1 className="text-2xl font-bold text-center text-gray-800 mb-2">
+          Purchase Access Code
+        </h1>
+        <p className="text-sm text-center text-gray-500">
+          Please fill in your details to proceed with the purchase
+        </p>
       </div>
       
-      <div className="space-y-4 mb-8">
-        {planOptions.map((plan, index) => (
-          <div 
-            key={plan.id}
-            className={`p-4 border rounded-lg cursor-pointer transition-all ${
-              selectedPlan === plan.id ? "border-credit-blue bg-blue-50" : "border-gray-200"
-            }`}
-            onClick={() => setSelectedPlan(plan.id)}
-          >
-            <div className="flex justify-between items-center">
-              <div>
-                <p className="font-medium">Get {plan.amount.toLocaleString()}</p>
-                <p className="text-sm text-gray-500">Pay {plan.fee.toLocaleString()}</p>
-              </div>
-              <div className="h-5 w-5 rounded-full border border-gray-300 flex items-center justify-center">
-                {selectedPlan === plan.id && (
-                  <div className="h-3 w-3 rounded-full bg-credit-blue"></div>
-                )}
-              </div>
-            </div>
-            {plan.id === "plan6" && (
-              <p className="mt-2 text-xs text-gray-500">Note that our account number changes from time to time</p>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="fullName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Full Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your full name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
             )}
-          </div>
-        ))}
-      </div>
-      
-      <div>
-        <CreditButton 
-          onClick={handleProceedToPayment}
-          disabled={!selectedPlan}
-          className="rounded-full"
-        >
-          PROCEED TO PAYMENTS
-        </CreditButton>
-      </div>
+          />
+          
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email Address</FormLabel>
+                <FormControl>
+                  <Input type="email" placeholder="Enter your email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input 
+                    type="tel" 
+                    placeholder="Enter your phone number" 
+                    {...field} 
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <CreditButton 
+            type="submit"
+            disabled={isSubmitting}
+            className="rounded-full mt-8"
+          >
+            {isSubmitting ? "Processing..." : "PROCEED TO PAYMENT"}
+          </CreditButton>
+        </form>
+      </Form>
     </MobileLayout>
   );
 };
