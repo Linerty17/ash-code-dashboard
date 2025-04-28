@@ -1,10 +1,12 @@
 
 import { Copy } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 
 const AccountDetails = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const copyToClipboard = (text: string, field: string) => {
     navigator.clipboard.writeText(text);
@@ -64,6 +66,13 @@ const AccountDetails = () => {
           </Button>
         </div>
       </div>
+
+      <Button 
+        className="w-full mt-6 rounded-full"
+        onClick={() => navigate("/payment-confirmation")}
+      >
+        I HAVE MADE MY PAYMENT
+      </Button>
     </div>
   );
 };

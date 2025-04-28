@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -35,6 +34,7 @@ const App = () => (
             <Route path="/whatsapp-group" element={<WhatsAppGroup />} />
             <Route path="/enter-code" element={<EnterCode />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
