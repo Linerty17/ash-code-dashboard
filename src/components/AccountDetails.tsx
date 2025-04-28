@@ -27,12 +27,12 @@ const AccountDetails = () => {
         <div className="flex justify-between items-center">
           <div>
             <p className="text-sm text-gray-500">Bank Name</p>
-            <p className="font-medium">Guaranty Trust Bank</p>
+            <p className="font-medium">Opay (paycom)</p>
           </div>
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => copyToClipboard("Guaranty Trust Bank", "Bank name")}
+            onClick={() => copyToClipboard("Opay (paycom)", "Bank name")}
           >
             <Copy className="h-4 w-4" />
           </Button>
@@ -41,12 +41,12 @@ const AccountDetails = () => {
         <div className="flex justify-between items-center">
           <div>
             <p className="text-sm text-gray-500">Account Number</p>
-            <p className="font-medium">0123456789</p>
+            <p className="font-medium">6108157283</p>
           </div>
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => copyToClipboard("0123456789", "Account number")}
+            onClick={() => copyToClipboard("6108157283", "Account number")}
           >
             <Copy className="h-4 w-4" />
           </Button>
@@ -55,12 +55,12 @@ const AccountDetails = () => {
         <div className="flex justify-between items-center">
           <div>
             <p className="text-sm text-gray-500">Account Name</p>
-            <p className="font-medium">Credit Pro Services</p>
+            <p className="font-medium">Sunday Liberty</p>
           </div>
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => copyToClipboard("Credit Pro Services", "Account name")}
+            onClick={() => copyToClipboard("Sunday Liberty", "Account name")}
           >
             <Copy className="h-4 w-4" />
           </Button>
