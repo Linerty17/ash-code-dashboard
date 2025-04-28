@@ -6,7 +6,7 @@ import CreditButton from "@/components/CreditButton";
 
 const WhatsAppGroup = () => {
   const handleJoinGroup = () => {
-    window.open("https://whatsapp.com/group-link", "_blank");
+    window.open("https://whatsapp.com/channel/0029Vb7MgnV2v1Iw950Wcg17", "_blank");
   };
 
   return (
