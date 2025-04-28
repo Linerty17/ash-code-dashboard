@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { MessageSquare, HelpCircle, PhoneCall, Store } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +11,12 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import AboutCreditPro from "./AboutCreditPro";
+import ContactSupport from "./ContactSupport";
 
 const HelpMenu = () => {
   const navigate = useNavigate();
   const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (
     <>
@@ -57,7 +60,7 @@ const HelpMenu = () => {
                 
                 <NavigationMenuLink
                   className="block p-2 hover:bg-gray-100 rounded-md cursor-pointer"
-                  onClick={() => window.alert("Contact Support clicked")}
+                  onClick={() => setIsContactOpen(true)}
                 >
                   <div className="flex items-center gap-2">
                     <PhoneCall className="w-4 h-4" />
@@ -73,6 +76,11 @@ const HelpMenu = () => {
       <AboutCreditPro 
         isOpen={isAboutOpen} 
         onClose={() => setIsAboutOpen(false)} 
+      />
+
+      <ContactSupport
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
       />
     </>
   );
