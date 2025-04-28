@@ -15,11 +15,11 @@ interface ContactSupportProps {
 
 const ContactSupport = ({ isOpen, onClose }: ContactSupportProps) => {
   const handleEmailSupport = () => {
-    window.location.href = "mailto:support@creditpro.com";
+    window.location.href = "mailto:paycustomerservice7@gmail.com";
   };
 
   const handleTelegramSupport = () => {
-    window.open("https://t.me/creditprosupport", "_blank");
+    window.open("https://t.me/Creditprovendor", "_blank");
   };
 
   return (
