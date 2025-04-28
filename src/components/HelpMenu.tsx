@@ -1,5 +1,6 @@
 
-import { MessageSquare, HelpCircle, PhoneCall } from "lucide-react";
+import { MessageSquare, HelpCircle, PhoneCall, Store, Telegram } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,6 +11,8 @@ import {
 } from "@/components/ui/navigation-menu";
 
 const HelpMenu = () => {
+  const navigate = useNavigate();
+
   return (
     <NavigationMenu className="fixed top-4 left-4">
       <NavigationMenuList>
@@ -31,11 +34,21 @@ const HelpMenu = () => {
               
               <NavigationMenuLink
                 className="block p-2 hover:bg-gray-100 rounded-md cursor-pointer"
-                onClick={() => window.alert("Need Help clicked")}
+                onClick={() => navigate("/purchase-options")}
               >
                 <div className="flex items-center gap-2">
-                  <HelpCircle className="w-4 h-4" />
-                  <span>Need Help</span>
+                  <Store className="w-4 h-4" />
+                  <span>Purchase Options</span>
+                </div>
+              </NavigationMenuLink>
+
+              <NavigationMenuLink
+                className="block p-2 hover:bg-gray-100 rounded-md cursor-pointer"
+                onClick={() => window.alert("Telegram Channel Coming Soon")}
+              >
+                <div className="flex items-center gap-2">
+                  <Telegram className="w-4 h-4" />
+                  <span>Join Telegram</span>
                 </div>
               </NavigationMenuLink>
               
