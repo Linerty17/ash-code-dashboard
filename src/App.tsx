@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import HelpMenu from "./components/HelpMenu";
 import { AuthProvider } from "./contexts/AuthContext";
+import PaymentConfirmation from "./pages/PaymentConfirmation";
 
 const queryClient = new QueryClient();
 

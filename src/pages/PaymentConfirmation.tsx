@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import MobileLayout from "@/components/MobileLayout";
@@ -11,7 +11,7 @@ const PaymentConfirmation = () => {
   const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
 
-  useState(() => {
+  useEffect(() => {
     const timer = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
