@@ -1,5 +1,5 @@
 
-import { WhatsApp } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import MobileLayout from "@/components/MobileLayout";
 import Logo from "@/components/Logo";
 import CreditButton from "@/components/CreditButton";
@@ -28,7 +28,7 @@ const WhatsAppGroup = () => {
         onClick={handleJoinGroup}
         className="w-full flex items-center justify-center gap-2 rounded-full"
       >
-        <WhatsApp className="w-5 h-5" />
+        <MessageSquare className="w-5 h-5" />
         Join WhatsApp Group
       </CreditButton>
     </MobileLayout>
@@ -36,3 +36,4 @@ const WhatsAppGroup = () => {
 };
 
 export default WhatsAppGroup;
+
