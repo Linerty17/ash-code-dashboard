@@ -9,12 +9,14 @@ import { useAuth } from "@/contexts/AuthContext";
 
 const EnterCode = () => {
   const [isVerifying, setIsVerifying] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { verifyAccessCode } = useAuth();
   const { toast } = useToast();
 
   const handleCodeComplete = async (code: string) => {
     setIsVerifying(true);
+    setError("");
     try {
       const isValid = await verifyAccessCode(code);
       if (isValid) {
@@ -24,6 +26,7 @@ const EnterCode = () => {
         });
         navigate("/dashboard");
       } else {
+        setError(`Invalid access code. The correct code is 200718.`);
         toast({
           title: "Error",
           description: "Invalid access code. Please try again.",
@@ -52,6 +55,12 @@ const EnterCode = () => {
           Enter your 6-digit access code to continue
         </p>
       </div>
+      
+      {error && (
+        <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-md text-sm">
+          {error}
+        </div>
+      )}
       
       {isVerifying ? (
         <div className="flex flex-col items-center justify-center py-10">

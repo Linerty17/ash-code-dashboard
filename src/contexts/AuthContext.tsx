@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, ReactNode } from "react";
 
 type User = {
@@ -54,12 +53,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  // Mock access code verification
+  // Verify access code - only accept "200718"
   const verifyAccessCode = async (code: string) => {
-    // In a real app, this would make an API call to verify the code
     return new Promise<boolean>((resolve) => {
       setTimeout(() => {
-        if (code.length === 6) {
+        if (code === "200718") {
           setUser((prev) => prev ? { ...prev, hasAccessCode: true } : null);
           resolve(true);
         } else {
