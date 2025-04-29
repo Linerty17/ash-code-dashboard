@@ -16,6 +16,8 @@ import NotFound from "./pages/NotFound";
 import HelpMenu from "./components/HelpMenu";
 import { AuthProvider } from "./contexts/AuthContext";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
+import WithdrawalForm from "./pages/WithdrawalForm";
+import WithdrawalConfirmation from "./pages/WithdrawalConfirmation";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +39,8 @@ const App = () => (
             <Route path="/enter-code" element={<EnterCode />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
+            <Route path="/withdrawal" element={<WithdrawalForm />} />
+            <Route path="/withdrawal-confirmation" element={<WithdrawalConfirmation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

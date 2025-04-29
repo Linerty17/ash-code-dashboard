@@ -21,6 +21,10 @@ const Dashboard = () => {
       description: "You have been logged out successfully",
     });
   };
+  
+  const handleWithdraw = () => {
+    navigate("/withdrawal");
+  };
 
   const dashboardContents = {
     dashboard: (
@@ -30,7 +34,11 @@ const Dashboard = () => {
             <h3 className="text-lg font-medium mb-2">Available Balance</h3>
             <p className="text-3xl font-bold">₦125,000.00</p>
             <div className="flex mt-4 space-x-2">
-              <CreditButton variant="primary" className="py-2">
+              <CreditButton 
+                variant="primary" 
+                className="py-2" 
+                onClick={handleWithdraw}
+              >
                 <DollarSign className="mr-1 h-4 w-4" />
                 Withdraw
               </CreditButton>
