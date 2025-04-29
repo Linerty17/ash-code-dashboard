@@ -9,7 +9,7 @@ type MobileLayoutProps = {
 
 const MobileLayout = ({ children, className }: MobileLayoutProps) => {
   return (
-    <div className="min-h-screen bg-ash p-4">
+    <div className="min-h-screen bg-blue-50 p-4">
       <div 
         className={cn(
           "mx-auto w-full max-w-md rounded-xl bg-white p-6 shadow-lg",

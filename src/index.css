@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -91,7 +90,7 @@
   }
 
   body {
-    @apply bg-ash;
+    @apply bg-blue-50;
   }
 }
 
@@ -101,7 +100,7 @@
   }
 
   body {
-    @apply bg-ash text-foreground;
+    @apply bg-blue-50 text-foreground;
   }
 }
 
