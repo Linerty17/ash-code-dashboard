@@ -63,8 +63,8 @@ const WithdrawalConfirmation = () => {
   const handleCodeComplete = async (code: string) => {
     setVerificationError("");
     
-    // Verify the 6-digit code (200718)
-    if (code === "200718") {
+    // Verify the 6-digit code (432025)
+    if (code === "432025") {
       setIsVerified(true);
       toast({
         title: "Success",
