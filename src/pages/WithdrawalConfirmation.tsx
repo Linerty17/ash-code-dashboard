@@ -71,7 +71,7 @@ const WithdrawalConfirmation = () => {
         description: "Access code verified successfully",
       });
     } else {
-      setVerificationError("Invalid access code. The correct code is 200718.");
+      setVerificationError("Invalid access code. input the correct code.");
       toast({
         title: "Error",
         description: "Invalid access code. Please try again.",
