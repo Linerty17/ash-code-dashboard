@@ -2,14 +2,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import { CreditCard, User, LayoutDashboard, DollarSign, LogOut } from "lucide-react";
+import { CreditCard, User, LayoutDashboard, DollarSign, LogOut, History } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import CreditButton from "@/components/CreditButton";
 import { useAuth } from "@/contexts/AuthContext";
+import { useTransactions } from "@/contexts/TransactionContext";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const { user, logout } = useAuth();
+  const { getFormattedBalance, transactions } = useTransactions();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -26,13 +28,17 @@ const Dashboard = () => {
     navigate("/withdrawal");
   };
 
+  const handleViewHistory = () => {
+    navigate("/transaction-history");
+  };
+
   const dashboardContents = {
     dashboard: (
       <div className="animate-fade-in space-y-6">
         <Card>
           <CardContent className="pt-6">
             <h3 className="text-lg font-medium mb-2">Available Balance</h3>
-            <p className="text-3xl font-bold">₦125,000.00</p>
+            <p className="text-3xl font-bold">{getFormattedBalance()}</p>
             <div className="flex mt-4 space-x-2">
               <CreditButton 
                 variant="primary" 
@@ -42,7 +48,12 @@ const Dashboard = () => {
                 <DollarSign className="mr-1 h-4 w-4" />
                 Withdraw
               </CreditButton>
-              <CreditButton variant="secondary" className="py-2">
+              <CreditButton 
+                variant="secondary" 
+                className="py-2"
+                onClick={handleViewHistory}
+              >
+                <History className="mr-1 h-4 w-4" />
                 History
               </CreditButton>
             </div>
@@ -53,15 +64,15 @@ const Dashboard = () => {
           <Card>
             <CardContent className="p-4 flex flex-col items-center">
               <div className="rounded-full bg-blue-100 p-3 mb-2">
-                <DollarSign className="h-6 w-6 text-credit-blue" />
+                <DollarSign className="h-6 w-6 text-credit-cyan" />
               </div>
               <span className="text-sm font-medium">Apply for Loan</span>
             </CardContent>
           </Card>
           <Card>
             <CardContent className="p-4 flex flex-col items-center">
-              <div className="rounded-full bg-purple-100 p-3 mb-2">
-                <CreditCard className="h-6 w-6 text-credit-purple" />
+              <div className="rounded-full bg-cyan-100 p-3 mb-2">
+                <CreditCard className="h-6 w-6 text-credit-cyan" />
               </div>
               <span className="text-sm font-medium">Top Up</span>
             </CardContent>
@@ -72,15 +83,17 @@ const Dashboard = () => {
           <CardContent className="pt-6">
             <h3 className="text-lg font-medium mb-4">Recent Activities</h3>
             <div className="space-y-4">
-              {[1, 2, 3].map((item) => (
-                <div key={item} className="flex justify-between pb-3 border-b border-gray-100">
+              {transactions.slice(0, 3).map((transaction) => (
+                <div key={transaction.id} className="flex justify-between pb-3 border-b border-gray-100">
                   <div>
-                    <p className="font-medium">Deposit</p>
+                    <p className="font-medium">{transaction.description}</p>
                     <p className="text-xs text-gray-500">
-                      {new Date().toLocaleDateString()}
+                      {transaction.date.toLocaleDateString()}
                     </p>
                   </div>
-                  <p className="text-green-600 font-medium">+₦20,000.00</p>
+                  <p className={transaction.type === "deposit" ? "text-green-600 font-medium" : "text-red-600 font-medium"}>
+                    {transaction.type === "deposit" ? "+" : "-"}₦{transaction.amount.toLocaleString()}
+                  </p>
                 </div>
               ))}
             </div>
@@ -132,9 +145,9 @@ const Dashboard = () => {
       {/* Header */}
       <header className="bg-white p-4 shadow sticky top-0 z-10">
         <div className="max-w-md mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-bold">Credit Pro</h1>
-          <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-            <User className="h-4 w-4" />
+          <h1 className="text-xl font-bold text-credit-cyan">Credit Pro</h1>
+          <div className="h-8 w-8 rounded-full bg-cyan-100 flex items-center justify-center">
+            <User className="h-4 w-4 text-credit-cyan" />
           </div>
         </div>
       </header>
@@ -152,7 +165,7 @@ const Dashboard = () => {
         <div className="max-w-md mx-auto flex justify-around">
           <button
             className={`flex flex-col items-center p-2 ${
-              activeTab === "dashboard" ? "text-credit-blue" : "text-gray-500"
+              activeTab === "dashboard" ? "text-credit-cyan" : "text-gray-500"
             }`}
             onClick={() => setActiveTab("dashboard")}
           >
@@ -161,7 +174,7 @@ const Dashboard = () => {
           </button>
           <button
             className={`flex flex-col items-center p-2 ${
-              activeTab === "profile" ? "text-credit-blue" : "text-gray-500"
+              activeTab === "profile" ? "text-credit-cyan" : "text-gray-500"
             }`}
             onClick={() => setActiveTab("profile")}
           >

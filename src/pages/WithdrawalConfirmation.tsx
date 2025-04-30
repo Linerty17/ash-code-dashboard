@@ -6,6 +6,7 @@ import NumPad from "@/components/NumPad";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
+import { useTransactions } from "@/contexts/TransactionContext";
 
 type WithdrawalDetailsType = {
   fullName: string;
@@ -21,6 +22,7 @@ const WithdrawalConfirmation = () => {
   const [isVerified, setIsVerified] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { addTransaction, balance } = useTransactions();
   
   useEffect(() => {
     // Get withdrawal details from sessionStorage
@@ -38,6 +40,16 @@ const WithdrawalConfirmation = () => {
     try {
       const details = JSON.parse(detailsStr);
       setWithdrawalDetails(details);
+      
+      // Validate if there's enough balance
+      if (Number(details.amount) > balance) {
+        toast({
+          title: "Insufficient Balance",
+          description: `Your available balance (₦${balance.toLocaleString()}) is less than the withdrawal amount (₦${parseInt(details.amount).toLocaleString()}).`,
+          variant: "destructive",
+        });
+        navigate('/withdrawal');
+      }
     } catch (e) {
       toast({
         title: "Error",
@@ -46,7 +58,7 @@ const WithdrawalConfirmation = () => {
       });
       navigate('/withdrawal');
     }
-  }, [navigate, toast]);
+  }, [navigate, toast, balance]);
   
   const handleCodeComplete = async (code: string) => {
     setVerificationError("");
@@ -80,14 +92,19 @@ const WithdrawalConfirmation = () => {
     
     setIsSubmitting(true);
     
-    // Mock withdrawal process
+    // Process the withdrawal
+    const withdrawalAmount = Number(withdrawalDetails?.amount || 0);
+    
     setTimeout(() => {
+      // Add the withdrawal transaction
+      addTransaction("withdrawal", withdrawalAmount, `Withdrawal to ${withdrawalDetails?.bank} - ${withdrawalDetails?.accountNumber}`);
+      
       // Clear the withdrawal details from sessionStorage
       sessionStorage.removeItem('withdrawalDetails');
       
       toast({
         title: "Success",
-        description: `Withdrawal of ₦${withdrawalDetails?.amount} has been processed successfully.`,
+        description: `Withdrawal of ₦${withdrawalAmount.toLocaleString()} has been processed successfully.`,
       });
       
       navigate('/dashboard');
@@ -105,8 +122,8 @@ const WithdrawalConfirmation = () => {
         </p>
       </div>
       
-      <div className="mb-8 p-4 bg-blue-50 rounded-lg">
-        <h3 className="font-medium text-blue-800 mb-3">Withdrawal Details</h3>
+      <div className="mb-8 p-4 bg-cyan-50 rounded-lg border border-cyan-100">
+        <h3 className="font-medium text-cyan-800 mb-3">Withdrawal Details</h3>
         <div className="grid grid-cols-2 gap-y-2 text-sm">
           <p className="text-gray-600">Name:</p>
           <p className="font-medium">{withdrawalDetails.fullName}</p>
@@ -143,7 +160,7 @@ const WithdrawalConfirmation = () => {
         <Button 
           onClick={handleSubmit}
           disabled={!isVerified || isSubmitting}
-          className="w-full bg-credit-blue hover:bg-blue-700"
+          className="w-full bg-credit-cyan hover:bg-cyan-600"
           size="lg"
         >
           {isSubmitting ? "Processing..." : "Complete Withdrawal"}

@@ -17,7 +17,7 @@ const CreditButton = ({
   const baseStyles = "rounded-md py-3 px-4 font-medium transition-all duration-200 focus:outline-none";
   
   const variantStyles = {
-    primary: "bg-credit-blue text-white hover:bg-blue-700 active:bg-blue-800",
+    primary: "bg-credit-cyan text-white hover:bg-cyan-600 active:bg-cyan-700",
     secondary: "bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 active:bg-gray-200",
     danger: "bg-red-600 text-white hover:bg-red-700 active:bg-red-800",
     success: "bg-green-600 text-white hover:bg-green-700 active:bg-green-800",

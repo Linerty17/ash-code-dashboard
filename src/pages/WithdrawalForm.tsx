@@ -13,6 +13,7 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
+import { useTransactions } from "@/contexts/TransactionContext";
 
 const NIGERIAN_BANKS = [
   "Access Bank",
@@ -34,6 +35,7 @@ const WithdrawalForm = () => {
   const [amount, setAmount] = useState("");
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { balance } = useTransactions();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,6 +63,16 @@ const WithdrawalForm = () => {
       toast({
         title: "Error",
         description: "Please enter a valid amount",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check if withdrawal amount is greater than available balance
+    if (Number(amount) > balance) {
+      toast({
+        title: "Insufficient Balance",
+        description: `Your available balance (₦${balance.toLocaleString()}) is less than the withdrawal amount (₦${parseInt(amount).toLocaleString()}).`,
         variant: "destructive",
       });
       return;
@@ -95,6 +107,7 @@ const WithdrawalForm = () => {
             placeholder="Enter your full name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
+            className="border-cyan-200 focus:border-cyan-500"
             required
           />
         </div>
@@ -106,6 +119,7 @@ const WithdrawalForm = () => {
             placeholder="Enter your 10-digit account number"
             value={accountNumber}
             onChange={(e) => setAccountNumber(e.target.value.replace(/\D/g, '').slice(0, 10))}
+            className="border-cyan-200 focus:border-cyan-500"
             required
             maxLength={10}
             inputMode="numeric"
@@ -115,7 +129,7 @@ const WithdrawalForm = () => {
         <div className="space-y-2">
           <Label htmlFor="bank">Bank</Label>
           <Select value={bank} onValueChange={setBank} required>
-            <SelectTrigger id="bank" className="w-full">
+            <SelectTrigger id="bank" className="w-full border-cyan-200 focus:border-cyan-500">
               <SelectValue placeholder="Select your bank" />
             </SelectTrigger>
             <SelectContent>
@@ -135,12 +149,14 @@ const WithdrawalForm = () => {
             placeholder="Enter amount to withdraw"
             value={amount}
             onChange={(e) => setAmount(e.target.value.replace(/\D/g, ''))}
+            className="border-cyan-200 focus:border-cyan-500"
             required
             inputMode="numeric"
           />
+          <p className="text-xs text-cyan-600">Available balance: ₦{balance.toLocaleString()}</p>
         </div>
         
-        <Button type="submit" className="w-full bg-credit-blue hover:bg-blue-700" size="lg">
+        <Button type="submit" className="w-full bg-credit-cyan hover:bg-cyan-600" size="lg">
           Continue to Verify
         </Button>
       </form>
