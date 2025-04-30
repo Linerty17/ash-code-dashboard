@@ -14,12 +14,15 @@ const WelcomeMessage = () => {
         <Logo size="md" />
       </div>
       
-      <div className="text-center mb-8">
-        <MessageSquarePlus className="w-16 h-16 mx-auto mb-4 text-credit-blue" />
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">
-          Welcome to Credit Pro!
+      <div className="relative text-center mb-8 p-6 rounded-xl bg-gradient-to-br from-cyan-50 to-white border border-cyan-100">
+        <div className="absolute top-0 right-0 w-20 h-20 bg-cyan-400/10 rounded-full -translate-y-1/4 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-16 h-16 bg-cyan-400/10 rounded-full translate-y-1/4 -translate-x-1/4" />
+        
+        <MessageSquarePlus className="w-16 h-16 mx-auto mb-4 text-cyan-500" />
+        <h1 className="text-2xl font-bold text-gray-800 mb-4 relative z-10">
+          Welcome to <span className="text-cyan-600">Credit Pro!</span>
         </h1>
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-600 mb-6 relative z-10">
           Thank you for joining us. We're excited to help you on your credit journey.
           To get started, you'll need to purchase an access code.
         </p>
@@ -27,7 +30,7 @@ const WelcomeMessage = () => {
       
       <CreditButton 
         onClick={() => navigate("/purchase-code")}
-        className="w-full rounded-full"
+        className="w-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700"
       >
         Get Started
       </CreditButton>

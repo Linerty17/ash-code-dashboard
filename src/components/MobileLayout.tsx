@@ -17,7 +17,7 @@ const MobileLayout = ({ children, className }: MobileLayoutProps) => {
     >
       <div 
         className={cn(
-          "mx-auto w-full max-w-md rounded-xl bg-white/90 backdrop-blur-sm p-6 shadow-lg border border-purple-100",
+          "mx-auto w-full max-w-md rounded-xl bg-white/90 backdrop-blur-sm p-6 shadow-lg border-t-4 border-t-cyan-400 border-r border-l border-b border-purple-100",
           className
         )}
       >

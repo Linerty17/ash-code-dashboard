@@ -68,6 +68,7 @@ export default {
 				'credit-blue': '#1e88e5',
 				'credit-purple': '#6f42c1',
 				'credit-pink': '#ff3eb5',
+				'credit-cyan': '#0EA5E9',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

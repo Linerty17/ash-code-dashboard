@@ -23,47 +23,47 @@ const HelpMenu = () => {
       <NavigationMenu className="fixed top-4 left-4">
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-gray-700">
+            <NavigationMenuTrigger className="text-white bg-cyan-500 hover:bg-cyan-600">
               Help & Info
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[200px] p-2">
+              <div className="w-[200px] p-2 bg-gradient-to-b from-white to-cyan-50">
                 <NavigationMenuLink
-                  className="block p-2 hover:bg-gray-100 rounded-md cursor-pointer"
+                  className="block p-2 hover:bg-cyan-100 rounded-md cursor-pointer"
                   onClick={() => setIsAboutOpen(true)}
                 >
                   <div className="flex items-center gap-2">
-                    <MessageSquare className="w-4 h-4" />
+                    <MessageSquare className="w-4 h-4 text-cyan-600" />
                     <span>About Credit Pro</span>
                   </div>
                 </NavigationMenuLink>
                 
                 <NavigationMenuLink
-                  className="block p-2 hover:bg-gray-100 rounded-md cursor-pointer"
+                  className="block p-2 hover:bg-cyan-100 rounded-md cursor-pointer"
                   onClick={() => navigate("/purchase-code")}
                 >
                   <div className="flex items-center gap-2">
-                    <Store className="w-4 h-4" />
+                    <Store className="w-4 h-4 text-cyan-600" />
                     <span>Purchase Access Code</span>
                   </div>
                 </NavigationMenuLink>
 
                 <NavigationMenuLink
-                  className="block p-2 hover:bg-gray-100 rounded-md cursor-pointer"
+                  className="block p-2 hover:bg-cyan-100 rounded-md cursor-pointer"
                   onClick={() => window.alert("Telegram Channel Coming Soon")}
                 >
                   <div className="flex items-center gap-2">
-                    <MessageSquare className="w-4 h-4" />
+                    <MessageSquare className="w-4 h-4 text-cyan-600" />
                     <span>Join Telegram</span>
                   </div>
                 </NavigationMenuLink>
                 
                 <NavigationMenuLink
-                  className="block p-2 hover:bg-gray-100 rounded-md cursor-pointer"
+                  className="block p-2 hover:bg-cyan-100 rounded-md cursor-pointer"
                   onClick={() => setIsContactOpen(true)}
                 >
                   <div className="flex items-center gap-2">
-                    <PhoneCall className="w-4 h-4" />
+                    <PhoneCall className="w-4 h-4 text-cyan-600" />
                     <span>Contact Support</span>
                   </div>
                 </NavigationMenuLink>

@@ -47,7 +47,7 @@ const SignUp = () => {
         title: "Account created",
         description: "Your account has been created successfully",
       });
-      navigate("/welcome-message"); // Updated navigation
+      navigate("/welcome-message");
     } catch (error) {
       toast({
         title: "Sign up failed",
@@ -65,57 +65,63 @@ const SignUp = () => {
         <div className="flex justify-center mb-4">
           <Logo size="lg" />
         </div>
-        <h1 className="text-2xl font-bold text-gray-800">Create Account</h1>
-        <p className="text-sm text-gray-500 mt-1">Sign up to get started</p>
+        <div className="relative inline-block">
+          <h1 className="text-2xl font-bold text-gray-800">Create Account</h1>
+          <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
+        </div>
+        <p className="text-sm text-gray-500 mt-3">Sign up to get started</p>
       </div>
       
-      <form onSubmit={handleSignup} className="w-full space-y-4">
-        <div>
-          <Input
-            type="text"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="credit-input"
-          />
-        </div>
-        <div>
-          <Input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="credit-input"
-          />
-        </div>
-        <div>
-          <Input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="credit-input"
-          />
-        </div>
-        <div>
-          <Input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="credit-input"
-          />
-        </div>
-        <div>
-          <CreditButton 
-            type="submit" 
-            disabled={isLoading}
-            className="rounded-full"
-          >
-            {isLoading ? "Creating Account..." : "Create Account"}
-          </CreditButton>
-        </div>
-      </form>
+      <div className="w-full p-6 rounded-lg bg-gradient-to-b from-white to-cyan-50 shadow-sm border border-cyan-100">
+        <form onSubmit={handleSignup} className="w-full space-y-4">
+          <div>
+            <Input
+              type="text"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="credit-input border-cyan-200 focus:border-cyan-500"
+            />
+          </div>
+          <div>
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="credit-input border-cyan-200 focus:border-cyan-500"
+            />
+          </div>
+          <div>
+            <Input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="credit-input border-cyan-200 focus:border-cyan-500"
+            />
+          </div>
+          <div>
+            <Input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="credit-input border-cyan-200 focus:border-cyan-500"
+            />
+          </div>
+          <div>
+            <CreditButton 
+              type="submit" 
+              disabled={isLoading}
+              variant="cyan"
+              className="rounded-full"
+            >
+              {isLoading ? "Creating Account..." : "Create Account"}
+            </CreditButton>
+          </div>
+        </form>
+      </div>
       
       <div className="mt-6 text-center">
         <p className="text-gray-500 mb-4">Already have an account?</p>
