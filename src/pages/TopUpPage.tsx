@@ -46,7 +46,7 @@ const TopUpPage = () => {
       if (!isValid) {
         toast({
           title: "Invalid Access Code",
-          description: "The access code you entered is invalid. use the correct code.",
+          description: "The access code you entered is invalid. input the correct code.",
           variant: "destructive",
         });
         setIsSubmitting(false);
