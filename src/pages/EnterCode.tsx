@@ -26,7 +26,7 @@ const EnterCode = () => {
         });
         navigate("/dashboard");
       } else {
-        setError(`Invalid access code. The correct code is 200718.`);
+        setError(`Invalid access Kindly Purchase your access code .`);
         toast({
           title: "Error",
           description: "Invalid access code. Please try again.",
