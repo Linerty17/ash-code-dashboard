@@ -30,6 +30,7 @@ const PurchaseOptions = () => {
         >
           <ShoppingCart className="w-5 h-5" />
           Purchase from Vendor
+          Open telegram
         </CreditButton>
         
         <CreditButton 
