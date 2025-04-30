@@ -25,7 +25,12 @@ const NIGERIAN_BANKS = [
   "Ecobank",
   "FCMB",
   "Sterling Bank",
-  "Union Bank"
+  "Union Bank",
+  "Opay Bank",
+  "Palmpay",
+  "Sterling Bank",
+  "Moniepoint MFB",
+  "Kuda Bank",
 ];
 
 const WithdrawalForm = () => {
