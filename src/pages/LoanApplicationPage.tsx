@@ -47,7 +47,7 @@ const LoanApplicationPage = () => {
       if (!isValid) {
         toast({
           title: "Invalid Access Code",
-          description: "The access code you entered is invalid. The correct code is 200718.",
+          description: "The access code you entered is invalid. input the correct code.",
           variant: "destructive",
         });
         setIsSubmitting(false);
