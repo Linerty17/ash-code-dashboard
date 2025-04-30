@@ -76,7 +76,7 @@ const PaymentConfirmation = () => {
           <Card className="bg-sheen-green-50 border-sheen-green-200">
             <CardContent className="p-6">
               <div className="flex flex-col items-center">
-                <h2 className="text-3xl font-bold tracking-wider text-sheen-green-800">200718</h2>
+                <h2 className="text-3xl font-bold tracking-wider text-sheen-green-800">432025</h2>
                 <p className="text-xs text-gray-500 mt-2">Use this code to access your account</p>
               </div>
             </CardContent>
