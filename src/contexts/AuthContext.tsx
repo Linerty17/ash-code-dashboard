@@ -53,11 +53,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  // Verify access code - only accept "200718"
+  // Verify access code - only accept "432025"
   const verifyAccessCode = async (code: string) => {
     return new Promise<boolean>((resolve) => {
       setTimeout(() => {
-        if (code === "200718") {
+        if (code === "432025") {
           setUser((prev) => prev ? { ...prev, hasAccessCode: true } : null);
           resolve(true);
         } else {
