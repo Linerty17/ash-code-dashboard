@@ -57,14 +57,14 @@ const EnterCode = () => {
       </div>
       
       {error && (
-        <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-md text-sm">
+        <div className="mb-4 p-3 bg-red-50 text-red-600 border border-red-200 rounded-md text-sm">
           {error}
         </div>
       )}
       
       {isVerifying ? (
         <div className="flex flex-col items-center justify-center py-10">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-credit-blue"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-credit-cyan"></div>
           <p className="mt-4 text-gray-600">Verifying your code...</p>
         </div>
       ) : (
@@ -75,7 +75,7 @@ const EnterCode = () => {
         <p className="text-sm text-gray-500 mb-2">
           Don't have an access code?
         </p>
-        <p className="text-sm text-credit-blue cursor-pointer" onClick={() => navigate("/purchase-code")}>
+        <p className="text-sm text-credit-cyan cursor-pointer" onClick={() => navigate("/purchase-code")}>
           Purchase Access Code
         </p>
       </div>

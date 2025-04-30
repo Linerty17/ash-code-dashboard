@@ -26,14 +26,22 @@ const WelcomeMessage = () => {
           Thank you for joining us. We're excited to help you on your credit journey.
           To get started, you'll need to purchase an access code.
         </p>
+        
+        <CreditButton 
+          onClick={() => navigate("/purchase-code")}
+          className="w-full mb-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700"
+        >
+          Get Started
+        </CreditButton>
+        
+        <CreditButton 
+          variant="secondary"
+          onClick={() => navigate("/enter-code")}
+          className="w-full rounded-full"
+        >
+          Continue to Dashboard
+        </CreditButton>
       </div>
-      
-      <CreditButton 
-        onClick={() => navigate("/purchase-code")}
-        className="w-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700"
-      >
-        Get Started
-      </CreditButton>
     </MobileLayout>
   );
 };

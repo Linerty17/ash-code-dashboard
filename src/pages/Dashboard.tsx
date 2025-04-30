@@ -32,6 +32,14 @@ const Dashboard = () => {
     navigate("/transaction-history");
   };
 
+  const handleTopUp = () => {
+    navigate("/top-up");
+  };
+
+  const handleApplyForLoan = () => {
+    navigate("/loan-application");
+  };
+
   const dashboardContents = {
     dashboard: (
       <div className="animate-fade-in space-y-6">
@@ -61,7 +69,7 @@ const Dashboard = () => {
         </Card>
         
         <div className="grid grid-cols-2 gap-4">
-          <Card>
+          <Card className="cursor-pointer hover:shadow-md transition-all" onClick={handleApplyForLoan}>
             <CardContent className="p-4 flex flex-col items-center">
               <div className="rounded-full bg-blue-100 p-3 mb-2">
                 <DollarSign className="h-6 w-6 text-credit-cyan" />
@@ -69,7 +77,7 @@ const Dashboard = () => {
               <span className="text-sm font-medium">Apply for Loan</span>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="cursor-pointer hover:shadow-md transition-all" onClick={handleTopUp}>
             <CardContent className="p-4 flex flex-col items-center">
               <div className="rounded-full bg-cyan-100 p-3 mb-2">
                 <CreditCard className="h-6 w-6 text-credit-cyan" />

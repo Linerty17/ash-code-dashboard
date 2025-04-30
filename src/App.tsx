@@ -20,6 +20,8 @@ import PaymentConfirmation from "./pages/PaymentConfirmation";
 import WithdrawalForm from "./pages/WithdrawalForm";
 import WithdrawalConfirmation from "./pages/WithdrawalConfirmation";
 import TransactionHistory from "./pages/TransactionHistory";
+import TopUpPage from "./pages/TopUpPage";
+import LoanApplicationPage from "./pages/LoanApplicationPage";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +47,8 @@ const App = () => (
               <Route path="/withdrawal" element={<WithdrawalForm />} />
               <Route path="/withdrawal-confirmation" element={<WithdrawalConfirmation />} />
               <Route path="/transaction-history" element={<TransactionHistory />} />
+              <Route path="/top-up" element={<TopUpPage />} />
+              <Route path="/loan-application" element={<LoanApplicationPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
