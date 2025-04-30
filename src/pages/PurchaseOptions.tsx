@@ -29,8 +29,7 @@ const PurchaseOptions = () => {
           className="w-full flex items-center justify-center gap-2 rounded-full"
         >
           <ShoppingCart className="w-5 h-5" />
-          Purchase from Vendor
-          Open telegram
+          Purchase from telegram vendor 
         </CreditButton>
         
         <CreditButton 
