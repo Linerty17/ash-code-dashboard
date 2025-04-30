@@ -64,7 +64,7 @@ const EnterCode = () => {
       
       {isVerifying ? (
         <div className="flex flex-col items-center justify-center py-10">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-credit-cyan"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sheen-green-600"></div>
           <p className="mt-4 text-gray-600">Verifying your code...</p>
         </div>
       ) : (
@@ -75,7 +75,7 @@ const EnterCode = () => {
         <p className="text-sm text-gray-500 mb-2">
           Don't have an access code?
         </p>
-        <p className="text-sm text-credit-cyan cursor-pointer" onClick={() => navigate("/purchase-code")}>
+        <p className="text-sm text-sheen-green-600 cursor-pointer" onClick={() => navigate("/purchase-code")}>
           Purchase Access Code
         </p>
       </div>

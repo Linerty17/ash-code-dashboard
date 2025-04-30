@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ArrowDownCircle, ArrowUpCircle } from "lucide-react";
+import { ChevronLeft, ArrowDownCircle, ArrowUpCircle, CreditCard, DollarSign } from "lucide-react";
 import { useTransactions, TransactionType } from "@/contexts/TransactionContext";
 import { Button } from "@/components/ui/button";
 
@@ -24,6 +24,19 @@ const TransactionHistory = () => {
       hour: '2-digit',
       minute: '2-digit',
     });
+  };
+
+  // Get the appropriate icon based on transaction description
+  const getTransactionIcon = (transaction: any) => {
+    if (transaction.description.includes("airtime") || transaction.description.includes("data")) {
+      return <CreditCard className="h-6 w-6" />;
+    } else if (transaction.description.includes("loan")) {
+      return <DollarSign className="h-6 w-6" />;
+    } else if (transaction.type === "deposit") {
+      return <ArrowDownCircle className="h-6 w-6" />;
+    } else {
+      return <ArrowUpCircle className="h-6 w-6" />;
+    }
   };
 
   return (
@@ -51,7 +64,7 @@ const TransactionHistory = () => {
           <Button 
             variant={filter === "all" ? "default" : "outline"}
             onClick={() => setFilter("all")}
-            className={filter === "all" ? "bg-credit-cyan text-white" : ""}
+            className={filter === "all" ? "bg-sheen-green-600 text-white" : ""}
             size="sm"
           >
             All
@@ -59,7 +72,7 @@ const TransactionHistory = () => {
           <Button 
             variant={filter === "deposit" ? "default" : "outline"}
             onClick={() => setFilter("deposit")}
-            className={filter === "deposit" ? "bg-credit-cyan text-white" : ""}
+            className={filter === "deposit" ? "bg-sheen-green-600 text-white" : ""}
             size="sm"
           >
             Deposits
@@ -67,7 +80,7 @@ const TransactionHistory = () => {
           <Button 
             variant={filter === "withdrawal" ? "default" : "outline"}
             onClick={() => setFilter("withdrawal")}
-            className={filter === "withdrawal" ? "bg-credit-cyan text-white" : ""}
+            className={filter === "withdrawal" ? "bg-sheen-green-600 text-white" : ""}
             size="sm"
           >
             Withdrawals
@@ -90,10 +103,7 @@ const TransactionHistory = () => {
                       ? "bg-green-100 text-green-600" 
                       : "bg-red-100 text-red-600"
                   }`}>
-                    {tx.type === "deposit" 
-                      ? <ArrowDownCircle className="h-6 w-6" /> 
-                      : <ArrowUpCircle className="h-6 w-6" />
-                    }
+                    {getTransactionIcon(tx)}
                   </div>
                   <div className="flex-1">
                     <p className="font-medium text-gray-800">

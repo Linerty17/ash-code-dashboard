@@ -43,7 +43,7 @@ const PaymentConfirmation = () => {
   }, [navigate]);
 
   const handleContinue = () => {
-    navigate("/dashboard");
+    navigate("/enter-code");
   };
 
   return (
@@ -56,8 +56,8 @@ const PaymentConfirmation = () => {
         <div className="text-center space-y-6">
           <h1 className="text-2xl font-bold text-gray-800">Verifying Payment</h1>
           <div className="flex flex-col items-center gap-4">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <Progress value={progress} className="w-full" />
+            <Loader2 className="h-8 w-8 animate-spin text-sheen-green-600" />
+            <Progress value={progress} className="w-full bg-sheen-green-100" />
             <p className="text-sm text-gray-500">
               Please wait while we verify your payment...
             </p>
@@ -66,27 +66,27 @@ const PaymentConfirmation = () => {
       ) : (
         <div className="text-center space-y-6">
           <div className="flex justify-center">
-            <CheckCircle className="h-16 w-16 text-green-500" />
+            <CheckCircle className="h-16 w-16 text-sheen-green-600" />
           </div>
           <h1 className="text-2xl font-bold text-gray-800">Payment Confirmed!</h1>
           <p className="text-sm text-gray-500">
             Your payment has been successfully verified. Here's your access code:
           </p>
           
-          <Card className="bg-blue-50 border-blue-200">
+          <Card className="bg-sheen-green-50 border-sheen-green-200">
             <CardContent className="p-6">
               <div className="flex flex-col items-center">
-                <h2 className="text-3xl font-bold tracking-wider text-credit-blue">200718</h2>
+                <h2 className="text-3xl font-bold tracking-wider text-sheen-green-800">200718</h2>
                 <p className="text-xs text-gray-500 mt-2">Use this code to access your account</p>
               </div>
             </CardContent>
           </Card>
           
           <Button 
-            className="w-full rounded-full mt-4"
+            className="w-full rounded-full mt-4 bg-sheen-green-600 hover:bg-sheen-green-700"
             onClick={handleContinue}
           >
-            CONTINUE TO DASHBOARD
+            CONTINUE TO ENTER CODE
           </Button>
         </div>
       )}

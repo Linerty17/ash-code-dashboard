@@ -71,16 +71,16 @@ const Dashboard = () => {
         <div className="grid grid-cols-2 gap-4">
           <Card className="cursor-pointer hover:shadow-md transition-all" onClick={handleApplyForLoan}>
             <CardContent className="p-4 flex flex-col items-center">
-              <div className="rounded-full bg-blue-100 p-3 mb-2">
-                <DollarSign className="h-6 w-6 text-credit-cyan" />
+              <div className="rounded-full bg-sheen-green-100 p-3 mb-2">
+                <DollarSign className="h-6 w-6 text-sheen-green-600" />
               </div>
               <span className="text-sm font-medium">Apply for Loan</span>
             </CardContent>
           </Card>
           <Card className="cursor-pointer hover:shadow-md transition-all" onClick={handleTopUp}>
             <CardContent className="p-4 flex flex-col items-center">
-              <div className="rounded-full bg-cyan-100 p-3 mb-2">
-                <CreditCard className="h-6 w-6 text-credit-cyan" />
+              <div className="rounded-full bg-sheen-green-100 p-3 mb-2">
+                <CreditCard className="h-6 w-6 text-sheen-green-600" />
               </div>
               <span className="text-sm font-medium">Top Up</span>
             </CardContent>
@@ -153,9 +153,18 @@ const Dashboard = () => {
       {/* Header */}
       <header className="bg-white p-4 shadow sticky top-0 z-10">
         <div className="max-w-md mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-bold text-credit-cyan">Credit Pro</h1>
-          <div className="h-8 w-8 rounded-full bg-cyan-100 flex items-center justify-center">
-            <User className="h-4 w-4 text-credit-cyan" />
+          <div className="flex items-center">
+            <div className="h-8 w-8 mr-2">
+              <img 
+                src="/lovable-uploads/83cd1c3c-5ca9-4bea-ae05-e41cc4b535c4.png" 
+                alt="Credit Pro Logo" 
+                className="w-full h-full object-contain" 
+              />
+            </div>
+            <h1 className="text-xl font-bold text-sheen-green-700">Credit Pro</h1>
+          </div>
+          <div className="h-8 w-8 rounded-full bg-sheen-green-100 flex items-center justify-center">
+            <User className="h-4 w-4 text-sheen-green-700" />
           </div>
         </div>
       </header>
@@ -173,7 +182,7 @@ const Dashboard = () => {
         <div className="max-w-md mx-auto flex justify-around">
           <button
             className={`flex flex-col items-center p-2 ${
-              activeTab === "dashboard" ? "text-credit-cyan" : "text-gray-500"
+              activeTab === "dashboard" ? "text-sheen-green-600" : "text-gray-500"
             }`}
             onClick={() => setActiveTab("dashboard")}
           >
@@ -182,7 +191,7 @@ const Dashboard = () => {
           </button>
           <button
             className={`flex flex-col items-center p-2 ${
-              activeTab === "profile" ? "text-credit-cyan" : "text-gray-500"
+              activeTab === "profile" ? "text-sheen-green-600" : "text-gray-500"
             }`}
             onClick={() => setActiveTab("profile")}
           >

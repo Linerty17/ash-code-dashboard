@@ -43,6 +43,27 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
       amount: 55000,
       date: new Date(),
       description: "Bonus credit"
+    },
+    {
+      id: "tx-4",
+      type: "withdrawal",
+      amount: 1000,
+      date: new Date(Date.now() - 86400000 * 0.5), // 12 hours ago
+      description: "Airtime purchase - MTN"
+    },
+    {
+      id: "tx-5",
+      type: "withdrawal",
+      amount: 3000,
+      date: new Date(Date.now() - 86400000 * 0.3), // 7 hours ago
+      description: "Data bundle - 1GB"
+    },
+    {
+      id: "tx-6",
+      type: "deposit",
+      amount: 50000,
+      date: new Date(Date.now() - 86400000 * 0.1), // 2 hours ago
+      description: "Loan disbursement"
     }
   ]);
 

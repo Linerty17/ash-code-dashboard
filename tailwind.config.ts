@@ -69,6 +69,15 @@ export default {
 				'credit-purple': '#6f42c1',
 				'credit-pink': '#ff3eb5',
 				'credit-cyan': '#0EA5E9',
+				'sheen-green': '#8FD400', // Adding sheen green 
+				'sheen-green-light': '#A0E515',
+				'sheen-green-dark': '#7BB501',
+				'sheen-green-50': '#F2FCE2', // Light shade for backgrounds
+				'sheen-green-100': '#E4F8C5',
+				'sheen-green-200': '#C9F080',
+				'sheen-green-600': '#8FD400', // Main brand color
+				'sheen-green-700': '#7BB501',
+				'sheen-green-800': '#66A001',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
