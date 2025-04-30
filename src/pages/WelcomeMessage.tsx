@@ -26,7 +26,7 @@ const WelcomeMessage = () => {
       </div>
       
       <CreditButton 
-        onClick={() => navigate("/purchase-options")}
+        onClick={() => navigate("/purchase-code")}
         className="w-full rounded-full"
       >
         Get Started

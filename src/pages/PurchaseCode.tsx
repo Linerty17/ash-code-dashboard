@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -42,6 +43,10 @@ const PurchaseCode = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleProceedToOptions = () => {
+    navigate("/purchase-options");
   };
   
   return (
@@ -127,7 +132,17 @@ const PurchaseCode = () => {
           </Form>
         </>
       ) : (
-        <AccountDetails />
+        <>
+          <AccountDetails />
+          <div className="mt-6">
+            <CreditButton
+              onClick={handleProceedToOptions}
+              className="w-full rounded-full"
+            >
+              Continue to Purchase Options
+            </CreditButton>
+          </div>
+        </>
       )}
     </MobileLayout>
   );

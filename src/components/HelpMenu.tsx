@@ -40,11 +40,11 @@ const HelpMenu = () => {
                 
                 <NavigationMenuLink
                   className="block p-2 hover:bg-gray-100 rounded-md cursor-pointer"
-                  onClick={() => navigate("/purchase-options")}
+                  onClick={() => navigate("/purchase-code")}
                 >
                   <div className="flex items-center gap-2">
                     <Store className="w-4 h-4" />
-                    <span>Purchase Options</span>
+                    <span>Purchase Access Code</span>
                   </div>
                 </NavigationMenuLink>
 
