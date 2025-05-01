@@ -67,12 +67,12 @@ const SignUp = () => {
         </div>
         <div className="relative inline-block">
           <h1 className="text-2xl font-bold text-gray-800">Create Account</h1>
-          <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
+          <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-sheen-green-400 to-sheen-green-500 rounded-full"></div>
         </div>
         <p className="text-sm text-gray-500 mt-3">Sign up to get started</p>
       </div>
       
-      <div className="w-full p-6 rounded-lg bg-gradient-to-b from-white to-cyan-50 shadow-sm border border-cyan-100">
+      <div className="w-full p-6 rounded-lg bg-gradient-to-b from-white to-sheen-green-50 shadow-sm border border-sheen-green-100">
         <form onSubmit={handleSignup} className="w-full space-y-4">
           <div>
             <Input
@@ -80,7 +80,7 @@ const SignUp = () => {
               placeholder="Full Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="credit-input border-cyan-200 focus:border-cyan-500"
+              className="credit-input border-sheen-green-200 focus:border-sheen-green-500"
             />
           </div>
           <div>
@@ -89,7 +89,7 @@ const SignUp = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="credit-input border-cyan-200 focus:border-cyan-500"
+              className="credit-input border-sheen-green-200 focus:border-sheen-green-500"
             />
           </div>
           <div>
@@ -98,7 +98,7 @@ const SignUp = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="credit-input border-cyan-200 focus:border-cyan-500"
+              className="credit-input border-sheen-green-200 focus:border-sheen-green-500"
             />
           </div>
           <div>
@@ -107,14 +107,14 @@ const SignUp = () => {
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="credit-input border-cyan-200 focus:border-cyan-500"
+              className="credit-input border-sheen-green-200 focus:border-sheen-green-500"
             />
           </div>
           <div>
             <CreditButton 
               type="submit" 
               disabled={isLoading}
-              variant="cyan"
+              variant="sheen"
               className="rounded-full"
             >
               {isLoading ? "Creating Account..." : "Create Account"}
@@ -127,7 +127,7 @@ const SignUp = () => {
         <p className="text-gray-500 mb-4">Already have an account?</p>
         <CreditButton 
           variant="secondary" 
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/login")}
           className="rounded-full"
         >
           Sign In

@@ -1,12 +1,17 @@
 
-import { useNavigate } from "react-router-dom";
 import { ShoppingCart, MessageSquare } from "lucide-react";
 import MobileLayout from "@/components/MobileLayout";
 import Logo from "@/components/Logo";
 import CreditButton from "@/components/CreditButton";
 
 const PurchaseOptions = () => {
-  const navigate = useNavigate();
+  const handleTelegramVendor = () => {
+    window.open("https://t.me/Creditprovendor", "_blank");
+  };
+
+  const handleTelegramGroup = () => {
+    window.open("https://t.me/Officialpaygo2025", "_blank");
+  };
 
   return (
     <MobileLayout className="p-4">
@@ -25,7 +30,7 @@ const PurchaseOptions = () => {
       
       <div className="space-y-4">
         <CreditButton 
-          onClick={() => navigate("/purchase-code")}
+          onClick={handleTelegramVendor}
           className="w-full flex items-center justify-center gap-2 rounded-full"
         >
           <ShoppingCart className="w-5 h-5" />
@@ -34,11 +39,11 @@ const PurchaseOptions = () => {
         
         <CreditButton 
           variant="secondary"
-          onClick={() => navigate("/whatsapp-group")}
+          onClick={handleTelegramGroup}
           className="w-full flex items-center justify-center gap-2 rounded-full"
         >
           <MessageSquare className="w-5 h-5" />
-          Join WhatsApp Group
+          Join Telegram Group
         </CreditButton>
       </div>
     </MobileLayout>
@@ -46,4 +51,3 @@ const PurchaseOptions = () => {
 };
 
 export default PurchaseOptions;
-

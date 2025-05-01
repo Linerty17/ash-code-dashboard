@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
@@ -209,12 +208,19 @@ const LoanApplicationPage = () => {
           />
           
           <CreditButton 
-            type="submit" 
-            disabled={isSubmitting} 
-            variant="cyan"
-            className="mt-4"
+            type="submit"
+            variant="sheen"
+            disabled={isSubmitting}
+            className="w-full rounded-full mt-4"
           >
-            {isSubmitting ? "Processing Application..." : "Submit Application"}
+            {isSubmitting ? (
+              <div className="flex items-center justify-center gap-2">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Processing Application...
+              </div>
+            ) : (
+              "Submit Application"
+            )}
           </CreditButton>
         </form>
       </Form>

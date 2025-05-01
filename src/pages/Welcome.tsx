@@ -61,7 +61,7 @@ const Welcome = () => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="credit-input"
+            className="credit-input border-sheen-green-200 focus:border-sheen-green-500"
           />
         </div>
         <div>
@@ -70,7 +70,7 @@ const Welcome = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="credit-input"
+            className="credit-input border-sheen-green-200 focus:border-sheen-green-500"
           />
         </div>
         <div>
