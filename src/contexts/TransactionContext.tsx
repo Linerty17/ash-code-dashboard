@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 export type TransactionType = "deposit" | "withdrawal";
@@ -15,14 +16,56 @@ type TransactionContextType = {
   transactions: Transaction[];
   addTransaction: (type: TransactionType, amount: number, description: string) => void;
   getFormattedBalance: () => string;
-  clearHistory: () => void;
 };
 
 const TransactionContext = createContext<TransactionContextType | undefined>(undefined);
 
 export const TransactionProvider = ({ children }: { children: ReactNode }) => {
-  const [balance, setBalance] = useState<number>(0); // Start with 0 balance
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [balance, setBalance] = useState<number>(125000); // Initial balance of ₦125,000
+  const [transactions, setTransactions] = useState<Transaction[]>([
+    {
+      id: "tx-1",
+      type: "deposit",
+      amount: 20000,
+      date: new Date(Date.now() - 86400000 * 2), // 2 days ago
+      description: "Initial deposit"
+    },
+    {
+      id: "tx-2",
+      type: "deposit",
+      amount: 50000,
+      date: new Date(Date.now() - 86400000), // 1 day ago
+      description: "Account funding"
+    },
+    {
+      id: "tx-3",
+      type: "deposit",
+      amount: 55000,
+      date: new Date(),
+      description: "Bonus credit"
+    },
+    {
+      id: "tx-4",
+      type: "withdrawal",
+      amount: 1000,
+      date: new Date(Date.now() - 86400000 * 0.5), // 12 hours ago
+      description: "Airtime purchase - MTN"
+    },
+    {
+      id: "tx-5",
+      type: "withdrawal",
+      amount: 3000,
+      date: new Date(Date.now() - 86400000 * 0.3), // 7 hours ago
+      description: "Data bundle - 1GB"
+    },
+    {
+      id: "tx-6",
+      type: "deposit",
+      amount: 50000,
+      date: new Date(Date.now() - 86400000 * 0.1), // 2 hours ago
+      description: "Loan disbursement"
+    }
+  ]);
 
   // Load data from localStorage on initialization
   useEffect(() => {
@@ -73,11 +116,6 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const clearHistory = () => {
-    setTransactions([]);
-    // Keep the balance as is
-  };
-
   const getFormattedBalance = () => {
     return new Intl.NumberFormat('en-NG', { 
       style: 'currency', 
@@ -92,8 +130,7 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
         balance,
         transactions,
         addTransaction,
-        getFormattedBalance,
-        clearHistory
+        getFormattedBalance
       }}
     >
       {children}

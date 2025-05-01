@@ -10,11 +10,14 @@ type MobileLayoutProps = {
 const MobileLayout = ({ children, className }: MobileLayoutProps) => {
   return (
     <div 
-      className="min-h-screen p-4 bg-gradient-to-b from-sheen-green-600/90 to-sheen-green-700/90"
+      className="min-h-screen p-4 bg-cover bg-center bg-fixed"
+      style={{ 
+        backgroundImage: `linear-gradient(rgba(143, 212, 0, 0.8), rgba(123, 181, 1, 0.9))` 
+      }}
     >
       <div 
         className={cn(
-          "mx-auto w-full max-w-md rounded-xl bg-white/95 backdrop-blur-sm p-6 shadow-md",
+          "mx-auto w-full max-w-md rounded-xl bg-white/95 backdrop-blur-sm p-6 shadow-lg",
           className
         )}
       >

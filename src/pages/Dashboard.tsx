@@ -1,158 +1,206 @@
-import { useEffect, useState } from "react";
+
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import MobileLayout from "@/components/MobileLayout";
-import CreditButton from "@/components/CreditButton";
-import Logo from "@/components/Logo";
+import { CreditCard, User, LayoutDashboard, DollarSign, LogOut, History } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import CreditButton from "@/components/CreditButton";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTransactions } from "@/contexts/TransactionContext";
 
 const Dashboard = () => {
-  const [showWithdrawalOptions, setShowWithdrawalOptions] = useState(false);
-  const [showTopUpOptions, setShowTopUpOptions] = useState(false);
-  const [isBalanceVisible, setIsBalanceVisible] = useState(false);
-  const [timeOfDay, setTimeOfDay] = useState("Day");
-
+  const [activeTab, setActiveTab] = useState("dashboard");
+  const { user, logout } = useAuth();
+  const { getFormattedBalance, transactions } = useTransactions();
   const navigate = useNavigate();
-  const { user } = useAuth();
-  const { transactions, balance, getFormattedBalance, clearHistory } = useTransactions();
+  const { toast } = useToast();
 
-  useEffect(() => {
-    const currentHour = new Date().getHours();
-    if (currentHour < 12) {
-      setTimeOfDay("Morning");
-    } else if (currentHour < 18) {
-      setTimeOfDay("Afternoon");
-    } else {
-      setTimeOfDay("Evening");
-    }
-  }, []);
-
-  const toggleBalanceVisibility = () => {
-    setIsBalanceVisible(!isBalanceVisible);
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+    toast({
+      title: "Logged out",
+      description: "You have been logged out successfully",
+    });
   };
-
-  const handleWithdrawalClick = () => {
-    setShowWithdrawalOptions(true);
-  };
-
-  const handleTopUpClick = () => {
-    setShowTopUpOptions(true);
-  };
-
-  const navigateToWithdrawal = () => {
+  
+  const handleWithdraw = () => {
     navigate("/withdrawal");
   };
 
-  const navigateToTopUp = () => {
-    navigate("/top-up");
-  };
-
-  const navigateToLoanApplication = () => {
-    navigate("/loan-application");
-  };
-
-  const navigateToTransactionHistory = () => {
+  const handleViewHistory = () => {
     navigate("/transaction-history");
   };
 
-  const navigateToProfile = () => {
-    navigate("/profile");
+  const handleTopUp = () => {
+    navigate("/top-up");
+  };
+
+  const handleApplyForLoan = () => {
+    navigate("/loan-application");
+  };
+
+  const dashboardContents = {
+    dashboard: (
+      <div className="animate-fade-in space-y-6">
+        <Card>
+          <CardContent className="pt-6">
+            <h3 className="text-lg font-medium mb-2">Available Balance</h3>
+            <p className="text-3xl font-bold">{getFormattedBalance()}</p>
+            <div className="flex mt-4 space-x-2">
+              <CreditButton 
+                variant="primary" 
+                className="py-2" 
+                onClick={handleWithdraw}
+              >
+                <DollarSign className="mr-1 h-4 w-4" />
+                Withdraw
+              </CreditButton>
+              <CreditButton 
+                variant="secondary" 
+                className="py-2"
+                onClick={handleViewHistory}
+              >
+                <History className="mr-1 h-4 w-4" />
+                History
+              </CreditButton>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <div className="grid grid-cols-2 gap-4">
+          <Card className="cursor-pointer hover:shadow-md transition-all" onClick={handleApplyForLoan}>
+            <CardContent className="p-4 flex flex-col items-center">
+              <div className="rounded-full bg-sheen-green-100 p-3 mb-2">
+                <DollarSign className="h-6 w-6 text-sheen-green-600" />
+              </div>
+              <span className="text-sm font-medium">Apply for Loan</span>
+            </CardContent>
+          </Card>
+          <Card className="cursor-pointer hover:shadow-md transition-all" onClick={handleTopUp}>
+            <CardContent className="p-4 flex flex-col items-center">
+              <div className="rounded-full bg-sheen-green-100 p-3 mb-2">
+                <CreditCard className="h-6 w-6 text-sheen-green-600" />
+              </div>
+              <span className="text-sm font-medium">Top Up</span>
+            </CardContent>
+          </Card>
+        </div>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <h3 className="text-lg font-medium mb-4">Recent Activities</h3>
+            <div className="space-y-4">
+              {transactions.slice(0, 3).map((transaction) => (
+                <div key={transaction.id} className="flex justify-between pb-3 border-b border-gray-100">
+                  <div>
+                    <p className="font-medium">{transaction.description}</p>
+                    <p className="text-xs text-gray-500">
+                      {transaction.date.toLocaleDateString()}
+                    </p>
+                  </div>
+                  <p className={transaction.type === "deposit" ? "text-green-600 font-medium" : "text-red-600 font-medium"}>
+                    {transaction.type === "deposit" ? "+" : "-"}₦{transaction.amount.toLocaleString()}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    ),
+    profile: (
+      <div className="animate-fade-in space-y-6">
+        <div className="text-center">
+          <div className="h-24 w-24 rounded-full bg-gray-200 mx-auto mb-4 flex items-center justify-center">
+            <User className="h-12 w-12 text-gray-400" />
+          </div>
+          <h2 className="text-xl font-bold">{user?.name || "User"}</h2>
+          <p className="text-gray-500">{user?.email || "user@example.com"}</p>
+        </div>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <h3 className="text-lg font-medium mb-4">Personal Information</h3>
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-2">
+                <p className="text-gray-500">Full Name</p>
+                <p className="font-medium">{user?.name || "User"}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <p className="text-gray-500">Email</p>
+                <p className="font-medium">{user?.email || "user@example.com"}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <p className="text-gray-500">Access Code</p>
+                <p className="font-medium">******</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <div className="pt-4">
+          <CreditButton variant="danger" onClick={handleLogout} className="py-2">
+            <LogOut className="mr-2 h-4 w-4" /> Log Out
+          </CreditButton>
+        </div>
+      </div>
+    ),
   };
 
   return (
-    <MobileLayout className="p-4">
-      <div className="flex items-center justify-between mb-6">
-        <Logo size="md" />
-        <Avatar className="h-10 w-10 cursor-pointer" onClick={navigateToProfile}>
-          {user?.profileImage ? (
-            <AvatarImage src={user.profileImage} alt={user.name} />
-          ) : (
-            <AvatarFallback className="bg-sheen-green-100 text-sheen-green-700">
-              {user?.name?.charAt(0).toUpperCase() || "U"}
-            </AvatarFallback>
-          )}
-        </Avatar>
-      </div>
-
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-800">Good {timeOfDay},</h1>
-        <p className="text-gray-500">Welcome back to your dashboard</p>
-      </div>
-
-      <Card className="mb-6">
-        <CardContent className="p-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-lg font-semibold">Account Balance</h3>
-              <p className="text-gray-500">Available to spend</p>
+    <div className="min-h-screen bg-ash flex flex-col">
+      {/* Header */}
+      <header className="bg-white p-4 shadow sticky top-0 z-10">
+        <div className="max-w-md mx-auto flex justify-between items-center">
+          <div className="flex items-center">
+            <div className="h-8 w-8 mr-2">
+              <img 
+                src="/lovable-uploads/83cd1c3c-5ca9-4bea-ae05-e41cc4b535c4.png" 
+                alt="Credit Pro Logo" 
+                className="w-full h-full object-contain" 
+              />
             </div>
-            <button onClick={toggleBalanceVisibility} className="focus:outline-none">
-              {isBalanceVisible ? (
-                <span className="font-semibold text-xl">{getFormattedBalance()}</span>
-              ) : (
-                <span className="text-xl">••••••••</span>
-              )}
-            </button>
+            <h1 className="text-xl font-bold text-sheen-green-700">Credit Pro</h1>
           </div>
-        </CardContent>
-      </Card>
-
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        <CreditButton onClick={handleWithdrawalClick} variant="secondary">
-          Withdraw
-        </CreditButton>
-        <CreditButton onClick={handleTopUpClick} variant="sheen">
-          Top Up
-        </CreditButton>
-      </div>
-
-      {showWithdrawalOptions && (
-        <Card className="mb-4">
-          <CardContent className="p-4">
-            <h3 className="text-lg font-semibold mb-2">Withdraw Funds</h3>
-            <p className="text-gray-500 mb-4">Choose a withdrawal method:</p>
-            <CreditButton onClick={navigateToWithdrawal} className="w-full rounded-full">
-              Withdraw to Bank
-            </CreditButton>
-            <CreditButton onClick={() => setShowWithdrawalOptions(false)} variant="secondary" className="w-full rounded-full mt-2">
-              Cancel
-            </CreditButton>
-          </CardContent>
-        </Card>
-      )}
-
-      {showTopUpOptions && (
-        <Card className="mb-4">
-          <CardContent className="p-4">
-            <h3 className="text-lg font-semibold mb-2">Top Up Account</h3>
-            <p className="text-gray-500 mb-4">Choose a top-up method:</p>
-            <CreditButton onClick={navigateToTopUp} className="w-full rounded-full">
-              Top Up with Card
-            </CreditButton>
-            <CreditButton onClick={() => setShowTopUpOptions(false)} variant="secondary" className="w-full rounded-full mt-2">
-              Cancel
-            </CreditButton>
-          </CardContent>
-        </Card>
-      )}
-
-      <Card className="mb-6">
-        <CardContent className="p-4">
-          <h3 className="text-lg font-semibold mb-2">Quick Actions</h3>
-          <div className="grid grid-cols-2 gap-4">
-            <CreditButton onClick={navigateToLoanApplication} variant="secondary" className="h-16 rounded-full">
-              Apply for Loan
-            </CreditButton>
-            <CreditButton onClick={navigateToTransactionHistory} variant="secondary" className="h-16 rounded-full">
-              Transaction History
-            </CreditButton>
+          <div className="h-8 w-8 rounded-full bg-sheen-green-100 flex items-center justify-center">
+            <User className="h-4 w-4 text-sheen-green-700" />
           </div>
-        </CardContent>
-      </Card>
-    </MobileLayout>
+        </div>
+      </header>
+      
+      {/* Main content */}
+      <main className="flex-1 p-4 pb-20">
+        <div className="max-w-md mx-auto">
+          {activeTab === "dashboard" && dashboardContents.dashboard}
+          {activeTab === "profile" && dashboardContents.profile}
+        </div>
+      </main>
+      
+      {/* Bottom navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2 px-4">
+        <div className="max-w-md mx-auto flex justify-around">
+          <button
+            className={`flex flex-col items-center p-2 ${
+              activeTab === "dashboard" ? "text-sheen-green-600" : "text-gray-500"
+            }`}
+            onClick={() => setActiveTab("dashboard")}
+          >
+            <LayoutDashboard className="h-5 w-5" />
+            <span className="text-xs mt-1">Dashboard</span>
+          </button>
+          <button
+            className={`flex flex-col items-center p-2 ${
+              activeTab === "profile" ? "text-sheen-green-600" : "text-gray-500"
+            }`}
+            onClick={() => setActiveTab("profile")}
+          >
+            <User className="h-5 w-5" />
+            <span className="text-xs mt-1">Profile</span>
+          </button>
+        </div>
+      </nav>
+    </div>
   );
 };
 
