@@ -1,6 +1,8 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
+import { Loader2 } from "lucide-react";
 import MobileLayout from "@/components/MobileLayout";
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
