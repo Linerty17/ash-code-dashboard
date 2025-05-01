@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
@@ -11,7 +12,6 @@ import { useTransactions } from "@/contexts/TransactionContext";
 
 const Dashboard = () => {
   const [showWithdrawalOptions, setShowWithdrawalOptions] = useState(false);
-  const [showTopUpOptions, setShowTopUpOptions] = useState(false);
   const [isBalanceVisible, setIsBalanceVisible] = useState(false);
   const [timeOfDay, setTimeOfDay] = useState("Day");
 
@@ -38,16 +38,12 @@ const Dashboard = () => {
     setShowWithdrawalOptions(true);
   };
 
-  const handleTopUpClick = () => {
-    setShowTopUpOptions(true);
+  const navigateToAirtimePurchase = () => {
+    navigate("/top-up");
   };
 
   const navigateToWithdrawal = () => {
     navigate("/withdrawal");
-  };
-
-  const navigateToTopUp = () => {
-    navigate("/top-up");
   };
 
   const navigateToLoanApplication = () => {
@@ -104,8 +100,8 @@ const Dashboard = () => {
         <CreditButton onClick={handleWithdrawalClick} variant="secondary">
           Withdraw
         </CreditButton>
-        <CreditButton onClick={handleTopUpClick} variant="sheen">
-          Top Up
+        <CreditButton onClick={navigateToAirtimePurchase} variant="sheen">
+          Purchase Airtime
         </CreditButton>
       </div>
 
@@ -118,21 +114,6 @@ const Dashboard = () => {
               Withdraw to Bank
             </CreditButton>
             <CreditButton onClick={() => setShowWithdrawalOptions(false)} variant="secondary" className="w-full rounded-full mt-2">
-              Cancel
-            </CreditButton>
-          </CardContent>
-        </Card>
-      )}
-
-      {showTopUpOptions && (
-        <Card className="mb-4">
-          <CardContent className="p-4">
-            <h3 className="text-lg font-semibold mb-2">Top Up Account</h3>
-            <p className="text-gray-500 mb-4">Choose a top-up method:</p>
-            <CreditButton onClick={navigateToTopUp} className="w-full rounded-full">
-              Top Up with Card
-            </CreditButton>
-            <CreditButton onClick={() => setShowTopUpOptions(false)} variant="secondary" className="w-full rounded-full mt-2">
               Cancel
             </CreditButton>
           </CardContent>

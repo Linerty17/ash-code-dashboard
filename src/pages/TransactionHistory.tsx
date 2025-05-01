@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ArrowDownCircle, ArrowUpCircle, CreditCard, DollarSign } from "lucide-react";
+import { ChevronLeft, ArrowDownCircle, ArrowUpCircle, CreditCard, DollarSign, Phone, Key } from "lucide-react";
 import { useTransactions, TransactionType } from "@/contexts/TransactionContext";
 import { Button } from "@/components/ui/button";
 
@@ -28,10 +28,14 @@ const TransactionHistory = () => {
 
   // Get the appropriate icon based on transaction description
   const getTransactionIcon = (transaction: any) => {
-    if (transaction.description.includes("airtime") || transaction.description.includes("data")) {
-      return <CreditCard className="h-6 w-6" />;
+    if (transaction.description.includes("airtime") || transaction.description.includes("phone")) {
+      return <Phone className="h-6 w-6" />;
+    } else if (transaction.description.includes("Access code")) {
+      return <Key className="h-6 w-6" />;
     } else if (transaction.description.includes("loan")) {
       return <DollarSign className="h-6 w-6" />;
+    } else if (transaction.description.includes("card")) {
+      return <CreditCard className="h-6 w-6" />;
     } else if (transaction.type === "deposit") {
       return <ArrowDownCircle className="h-6 w-6" />;
     } else {
@@ -40,7 +44,7 @@ const TransactionHistory = () => {
   };
 
   return (
-    <div className="min-h-screen bg-ash flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-sheen-green-600/90 to-sheen-green-700/90 flex flex-col">
       {/* Header */}
       <header className="bg-white p-4 shadow sticky top-0 z-10">
         <div className="max-w-md mx-auto flex justify-between items-center">
@@ -124,7 +128,7 @@ const TransactionHistory = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center py-10">
+            <div className="text-center py-10 bg-white/80 rounded-lg shadow-sm">
               <p className="text-gray-500">No transactions found</p>
             </div>
           )}

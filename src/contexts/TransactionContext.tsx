@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 export type TransactionType = "deposit" | "withdrawal";
@@ -21,7 +22,8 @@ type TransactionContextType = {
 const TransactionContext = createContext<TransactionContextType | undefined>(undefined);
 
 export const TransactionProvider = ({ children }: { children: ReactNode }) => {
-  const [balance, setBalance] = useState<number>(0); // Start with 0 balance
+  // Initialize with 135,000 as the default balance
+  const [balance, setBalance] = useState<number>(135000);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   // Load data from localStorage on initialization
@@ -31,6 +33,10 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
     
     if (savedBalance) {
       setBalance(Number(savedBalance));
+    } else {
+      // If no saved balance, set it to 135,000
+      setBalance(135000);
+      localStorage.setItem("creditProBalance", "135000");
     }
     
     if (savedTransactions) {
