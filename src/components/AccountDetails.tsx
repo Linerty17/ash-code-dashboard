@@ -20,7 +20,7 @@ const AccountDetails = () => {
     <div className="space-y-6">
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">Bank Account Details</h2>
-        <p className="text-sm text-gray-500">Please make a transfer of ₦7,650</p>
+        <p className="text-sm text-gray-500">Kindly make a transfer of ₦6,950</p>
       </div>
       
       <div className="space-y-4 bg-gray-50 p-4 rounded-lg">
