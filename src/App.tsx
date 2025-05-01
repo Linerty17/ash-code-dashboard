@@ -22,6 +22,9 @@ import WithdrawalConfirmation from "./pages/WithdrawalConfirmation";
 import TransactionHistory from "./pages/TransactionHistory";
 import TopUpPage from "./pages/TopUpPage";
 import LoanApplicationPage from "./pages/LoanApplicationPage";
+import TelegramChannel from "./pages/TelegramChannel";
+import ProfilePage from "./pages/ProfilePage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -38,18 +41,22 @@ const App = () => (
               <Route path="/" element={<Navigate to="/signup" replace />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Welcome />} />
-              <Route path="/welcome-message" element={<WelcomeMessage />} />
-              <Route path="/purchase-options" element={<PurchaseOptions />} />
-              <Route path="/purchase-code" element={<PurchaseCode />} />
-              <Route path="/whatsapp-group" element={<WhatsAppGroup />} />
-              <Route path="/enter-code" element={<EnterCode />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
-              <Route path="/withdrawal" element={<WithdrawalForm />} />
-              <Route path="/withdrawal-confirmation" element={<WithdrawalConfirmation />} />
-              <Route path="/transaction-history" element={<TransactionHistory />} />
-              <Route path="/top-up" element={<TopUpPage />} />
-              <Route path="/loan-application" element={<LoanApplicationPage />} />
+              
+              {/* Protected routes - require authentication */}
+              <Route path="/welcome-message" element={<ProtectedRoute><WelcomeMessage /></ProtectedRoute>} />
+              <Route path="/purchase-options" element={<ProtectedRoute><PurchaseOptions /></ProtectedRoute>} />
+              <Route path="/purchase-code" element={<ProtectedRoute><PurchaseCode /></ProtectedRoute>} />
+              <Route path="/whatsapp-group" element={<ProtectedRoute><WhatsAppGroup /></ProtectedRoute>} />
+              <Route path="/enter-code" element={<ProtectedRoute><EnterCode /></ProtectedRoute>} />
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/payment-confirmation" element={<ProtectedRoute><PaymentConfirmation /></ProtectedRoute>} />
+              <Route path="/withdrawal" element={<ProtectedRoute><WithdrawalForm /></ProtectedRoute>} />
+              <Route path="/withdrawal-confirmation" element={<ProtectedRoute><WithdrawalConfirmation /></ProtectedRoute>} />
+              <Route path="/transaction-history" element={<ProtectedRoute><TransactionHistory /></ProtectedRoute>} />
+              <Route path="/top-up" element={<ProtectedRoute><TopUpPage /></ProtectedRoute>} />
+              <Route path="/loan-application" element={<ProtectedRoute><LoanApplicationPage /></ProtectedRoute>} />
+              <Route path="/telegram-channel" element={<ProtectedRoute><TelegramChannel /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

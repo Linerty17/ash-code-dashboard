@@ -1,16 +1,19 @@
 
 import { ShoppingCart, MessageSquare } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import MobileLayout from "@/components/MobileLayout";
 import Logo from "@/components/Logo";
 import CreditButton from "@/components/CreditButton";
 
 const PurchaseOptions = () => {
+  const navigate = useNavigate();
+
   const handleTelegramVendor = () => {
     window.open("https://t.me/Creditprovendor", "_blank");
   };
 
   const handleTelegramGroup = () => {
-    window.open("https://t.me/Officialpaygo2025", "_blank");
+    navigate("/telegram-channel");
   };
 
   return (
