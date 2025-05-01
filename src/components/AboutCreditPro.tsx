@@ -17,10 +17,10 @@ const AboutCreditPro = ({ isOpen, onClose }: AboutCreditProProps) => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-lg">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-primary">About Credit Pro</DialogTitle>
+          <DialogTitle className="text-2xl font-bold text-primary">About CreditPro</DialogTitle>
           <DialogDescription className="mt-4 space-y-4 text-left">
             <p>
-              Credit Pro is your trusted companion for managing and improving your credit score. Our platform provides comprehensive tools and insights to help you make informed financial decisions.
+              We're excited to introduce you to the ultimate platform of earning opportunities.
             </p>
             
             <div className="space-y-2">
@@ -35,17 +35,17 @@ const AboutCreditPro = ({ isOpen, onClose }: AboutCreditProProps) => {
             </div>
 
             <div className="space-y-2">
-              <h3 className="font-semibold text-primary">Why Choose Credit Pro?</h3>
+              <h3 className="font-semibold text-primary">How to get your 6-digit access code.</h3>
               <ul className="list-disc pl-5 space-y-1">
-                <li>Expert guidance from financial professionals</li>
-                <li>User-friendly interface and tools</li>
-                <li>Regular updates and notifications</li>
+                <li>Sign up with a valid email address</li>
+                <li>Purchase your access code for #6,950 on our website or from app vendor</li>
+                <li>verification to your payment will be done.</li>
                 <li>Dedicated customer support</li>
               </ul>
             </div>
 
             <p className="text-sm text-muted-foreground mt-4">
-              Join thousands of satisfied users who have improved their credit scores with Credit Pro.
+              Get started with a generous bonus of 130,000 naira with loan and credit source of creditPro.
             </p>
           </DialogDescription>
         </DialogHeader>
