@@ -46,7 +46,7 @@ const PaymentConfirmation = () => {
   };
 
   const handleGoBack = () => {
-    navigate("/dashboard");
+    navigate("/enter-code");
   };
 
   return (
@@ -89,7 +89,7 @@ const PaymentConfirmation = () => {
               className="w-full rounded-full border-sheen-green-600 text-sheen-green-600 hover:bg-sheen-green-50"
               onClick={handleGoBack}
             >
-              RETURN TO DASHBOARD
+              RETURN TO ENTER CODE
             </Button>
           </div>
         </div>
