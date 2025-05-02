@@ -22,7 +22,7 @@ const TelegramChannel = () => {
   return (
     <MobileLayout className="p-4">
       <div className="flex justify-center mb-6">
-        <Logo size="md" />
+        <Logo size="lg" />
       </div>
       
       <div className="mb-8">
@@ -32,14 +32,6 @@ const TelegramChannel = () => {
         <p className="text-sm text-center text-gray-500 mb-6">
           Connect with our community for updates, support, and exclusive offers
         </p>
-        
-        <div className="flex justify-center mb-6">
-          <img 
-            src="/lovable-uploads/db76e032-58b4-4f3a-87af-d43f4ab1a6ea.png" 
-            alt="Telegram Logo" 
-            className="w-24 h-24 object-contain"
-          />
-        </div>
       </div>
       
       <div className="space-y-4">
