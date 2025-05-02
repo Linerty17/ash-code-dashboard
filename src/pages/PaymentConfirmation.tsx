@@ -1,34 +1,49 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Clock, AlertCircle } from "lucide-react";
+import { Loader2, CheckCircle } from "lucide-react";
 import MobileLayout from "@/components/MobileLayout";
 import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import AccountDetails from "@/components/AccountDetails";
 
 const PaymentConfirmation = () => {
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [verificationComplete, setVerificationComplete] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const handleCheckStatus = () => {
-    setIsProcessing(true);
-    
-    // Show processing for a short time
-    setTimeout(() => {
-      setIsProcessing(false);
+  useEffect(() => {
+    // Show toast when the access code is displayed
+    if (verificationComplete) {
       toast({
-        description: "Payment verification is still in progress. Please check back later.",
+        description: "Payment confirmed successfully!",
         duration: 5000,
       });
-    }, 2000);
-  };
+    }
+  }, [verificationComplete, toast]);
 
-  const handleReturnToPayment = () => {
-    navigate("/purchase-code");
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(timer);
+          setTimeout(() => {
+            setVerificationComplete(true);
+          }, 500);
+          return 100;
+        }
+        return prev + 10;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [navigate]);
+
+  const handleContinue = () => {
+    navigate("/enter-code");
   };
 
   return (
@@ -37,48 +52,44 @@ const PaymentConfirmation = () => {
         <Logo size="md" />
       </div>
       
-      <div className="text-center space-y-6">
-        <div className="flex justify-center">
-          <Clock className="h-16 w-16 text-amber-500" />
+      {!verificationComplete ? (
+        <div className="text-center space-y-6">
+          <h1 className="text-2xl font-bold text-gray-800">Verifying Payment</h1>
+          <div className="flex flex-col items-center gap-4">
+            <Loader2 className="h-8 w-8 animate-spin text-sheen-green-600" />
+            <Progress value={progress} className="w-full bg-sheen-green-100" />
+            <p className="text-sm text-gray-500">
+              Please wait while we verify your payment...
+            </p>
+          </div>
         </div>
-        <h1 className="text-2xl font-bold text-gray-800">Payment Pending</h1>
-        <Card className="bg-amber-50 border-amber-200">
-          <CardContent className="p-6">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-amber-500 mt-0.5" />
-              <p className="text-sm text-gray-700">
-                Your payment is being processed. This may take some time to verify. 
-                Please check back later or contact support if it's taking too long.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <div className="space-y-4 pt-4">
-          <Button 
-            className="w-full rounded-full"
-            onClick={handleCheckStatus}
-            disabled={isProcessing}
-          >
-            {isProcessing ? "Checking..." : "CHECK PAYMENT STATUS"}
-          </Button>
+      ) : (
+        <div className="text-center space-y-6">
+          <div className="flex justify-center">
+            <CheckCircle className="h-16 w-16 text-sheen-green-600" />
+          </div>
+          <h1 className="text-2xl font-bold text-gray-800">Payment Confirmed!</h1>
+          <p className="text-sm text-gray-500">
+            Your payment has been successfully verified. Here's your access code:
+          </p>
+          
+          <Card className="bg-sheen-green-50 border-sheen-green-200">
+            <CardContent className="p-6">
+              <div className="flex flex-col items-center">
+                <h2 className="text-3xl font-bold tracking-wider text-sheen-green-800">432025</h2>
+                <p className="text-xs text-gray-500 mt-2">Use this code to access your account</p>
+              </div>
+            </CardContent>
+          </Card>
           
           <Button 
-            variant="outline"
-            className="w-full rounded-full"
-            onClick={handleReturnToPayment}
+            className="w-full rounded-full mt-4 bg-sheen-green-600 hover:bg-sheen-green-700"
+            onClick={handleContinue}
           >
-            BACK TO PAYMENT PAGE
+            CONTINUE TO ENTER CODE
           </Button>
         </div>
-      </div>
-      
-      <div className="mt-8">
-        <p className="text-center text-sm font-medium text-gray-700 mb-4">
-          Payment Details
-        </p>
-        <AccountDetails />
-      </div>
+      )}
     </MobileLayout>
   );
 };
