@@ -1,12 +1,11 @@
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Loader2, CheckCircle } from "lucide-react";
+import { Loader2, XCircle } from "lucide-react";
 import MobileLayout from "@/components/MobileLayout";
 import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 
 const PaymentConfirmation = () => {
@@ -16,10 +15,10 @@ const PaymentConfirmation = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Show toast when the access code is displayed
+    // Show toast when verification is complete
     if (verificationComplete) {
       toast({
-        description: "Payment confirmed successfully!",
+        description: "Payment verification failed!",
         duration: 5000,
       });
     }
@@ -42,8 +41,12 @@ const PaymentConfirmation = () => {
     return () => clearInterval(timer);
   }, [navigate]);
 
-  const handleContinue = () => {
-    navigate("/enter-code");
+  const handleRetry = () => {
+    navigate("/purchase-code");
+  };
+
+  const handleGoBack = () => {
+    navigate("/dashboard");
   };
 
   return (
@@ -66,28 +69,29 @@ const PaymentConfirmation = () => {
       ) : (
         <div className="text-center space-y-6">
           <div className="flex justify-center">
-            <CheckCircle className="h-16 w-16 text-sheen-green-600" />
+            <XCircle className="h-16 w-16 text-red-600" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800">Payment Confirmed!</h1>
+          <h1 className="text-2xl font-bold text-gray-800">Payment Not Confirmed!</h1>
           <p className="text-sm text-gray-500">
-            Your payment has been successfully verified. Here's your access code:
+            We couldn't verify your payment at this time. Please try again or contact support if the issue persists.
           </p>
           
-          <Card className="bg-sheen-green-50 border-sheen-green-200">
-            <CardContent className="p-6">
-              <div className="flex flex-col items-center">
-                <h2 className="text-3xl font-bold tracking-wider text-sheen-green-800">432025</h2>
-                <p className="text-xs text-gray-500 mt-2">Use this code to access your account</p>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Button 
-            className="w-full rounded-full mt-4 bg-sheen-green-600 hover:bg-sheen-green-700"
-            onClick={handleContinue}
-          >
-            CONTINUE TO ENTER CODE
-          </Button>
+          <div className="flex flex-col gap-3 mt-6">
+            <Button 
+              className="w-full rounded-full bg-sheen-green-600 hover:bg-sheen-green-700"
+              onClick={handleRetry}
+            >
+              TRY AGAIN
+            </Button>
+            
+            <Button 
+              variant="outline"
+              className="w-full rounded-full border-sheen-green-600 text-sheen-green-600 hover:bg-sheen-green-50"
+              onClick={handleGoBack}
+            >
+              RETURN TO DASHBOARD
+            </Button>
+          </div>
         </div>
       )}
     </MobileLayout>
