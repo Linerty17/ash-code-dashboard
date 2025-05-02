@@ -45,7 +45,7 @@ const AboutCreditPro = ({ isOpen, onClose }: AboutCreditProProps) => {
             </div>
 
             <p className="text-sm text-muted-foreground mt-4">
-              Get started with a generous bonus of 130,000 naira with loan and credit source of creditPro.
+              Get started with a generous bonus of 135,000 naira with loan and credit source of creditPro.
             </p>
           </DialogDescription>
         </DialogHeader>
